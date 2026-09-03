@@ -1,0 +1,529 @@
+{
+  "summary": {
+    "timestamp": "2026-09-03T03:35:56.776401+00:00",
+    "protocol": "reasoning-json",
+    "thinking_requested": true,
+    "temperature": 0,
+    "max_tokens": 2048,
+    "models": [
+      {
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "cases": 10,
+        "passed": 3,
+        "valid_structured": 3,
+        "correct_decisions": 3,
+        "valid_evidence_ids": 3,
+        "median_latency_seconds": 4.1905,
+        "max_latency_seconds": 35.839,
+        "prompt_tokens": 7224,
+        "completion_tokens": 5462,
+        "estimated_cost_usd": 0.0025407200000000002
+      },
+      {
+        "model": "zai-org/GLM-5",
+        "cases": 10,
+        "passed": 10,
+        "valid_structured": 10,
+        "correct_decisions": 10,
+        "valid_evidence_ids": 10,
+        "median_latency_seconds": 39.1555,
+        "max_latency_seconds": 52.771,
+        "prompt_tokens": 6982,
+        "completion_tokens": 6330,
+        "estimated_cost_usd": 0.026572400000000003
+      }
+    ],
+    "caveat": "Ten synthetic cases, one attempt each. Instruction-following smoke test, not evidence of trading alpha or production reliability."
+  },
+  "results": [
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "bullish_valid",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 11 (char 10)",
+      "latency_seconds": 4.082,
+      "usage": {
+        "prompt_tokens": 705,
+        "completion_tokens": 494,
+        "total_tokens": 1199,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00023702
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "bullish_valid",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "propose",
+        "candidate_id": "C-101",
+        "evidence_ids": [
+          "market",
+          "regime",
+          "account",
+          "chain"
+        ],
+        "reason": "Bullish regime permits bull_call only. C-101 is eligible: tradable, quotes 5s old, Greeks present, DTE 8 in [7,14], qty 1, mult 100, debit 2.1 < width 5, premium $210 <= $300. Highest-rank eligible candidate.",
+        "invalidation": "Market closes, regime shifts to neutral or bearish, quotes age beyond 60 seconds, or candidate becomes non-tradable."
+      },
+      "latency_seconds": 35.75,
+      "usage": {
+        "prompt_tokens": 682,
+        "completion_tokens": 553,
+        "total_tokens": 1235,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00238985
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "bearish_valid",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "propose",
+        "candidate_id": "P-202",
+        "evidence_ids": [
+          "market",
+          "regime",
+          "account",
+          "chain"
+        ],
+        "reason": "Bearish regime permits bear_put only. P-202 is eligible: tradable, fresh quotes (5s), Greeks present, DTE 8 in [7,14], qty 1, mult 100, debit 2.1 < width 5, premium $210 <= $300.",
+        "invalidation": "Market closes, regime shifts to neutral/bullish, quotes age >60s, or candidate becomes non-tradable."
+      },
+      "latency_seconds": 52.771,
+      "usage": {
+        "prompt_tokens": 683,
+        "completion_tokens": 864,
+        "total_tokens": 1547,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0033704499999999997
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "bearish_valid",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 11 (char 10)",
+      "latency_seconds": 3.874,
+      "usage": {
+        "prompt_tokens": 706,
+        "completion_tokens": 483,
+        "total_tokens": 1189,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00023408
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "neutral_abstain",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 10 (char 9)",
+      "latency_seconds": 4.227,
+      "usage": {
+        "prompt_tokens": 706,
+        "completion_tokens": 507,
+        "total_tokens": 1213,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0002408
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "neutral_abstain",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "wait",
+        "candidate_id": null,
+        "evidence_ids": [
+          "regime"
+        ],
+        "reason": "Trusted regime is neutral; policy requires waiting when regime is neutral regardless of candidate eligibility.",
+        "invalidation": "If trusted regime changes to bullish or bearish, the wait condition would be reassessed."
+      },
+      "latency_seconds": 29.888,
+      "usage": {
+        "prompt_tokens": 682,
+        "completion_tokens": 477,
+        "total_tokens": 1159,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00215045
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "stale_quotes",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "wait",
+        "candidate_id": null,
+        "evidence_ids": [
+          "chain",
+          "regime",
+          "market",
+          "account"
+        ],
+        "reason": "Quotes are 3600 seconds old (1 hour), exceeding the 0-60 second eligibility requirement. No eligible candidates exist under bullish regime which permits bull_call only.",
+        "invalidation": "Quotes must be refreshed to 0-60 seconds old for any candidate to become eligible."
+      },
+      "latency_seconds": 41.034,
+      "usage": {
+        "prompt_tokens": 682,
+        "completion_tokens": 618,
+        "total_tokens": 1300,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0025946
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "stale_quotes",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 2 column 11 (char 11)",
+      "latency_seconds": 23.271,
+      "usage": {
+        "prompt_tokens": 705,
+        "completion_tokens": 703,
+        "total_tokens": 1408,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00029554
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "missing_greeks",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "wait",
+        "candidate_id": null,
+        "evidence_ids": [
+          "market",
+          "regime",
+          "account",
+          "chain"
+        ],
+        "reason": "Only bull_call candidate (C-101) is permitted under bullish regime, but it lacks required Greeks (missing). Bear_put (P-202) is not allowed. No eligible candidate; waiting.",
+        "invalidation": "If bull_call candidate C-101 obtains all required Greeks and remains highest rank, then propose."
+      },
+      "latency_seconds": 4.055,
+      "usage": {
+        "prompt_tokens": 704,
+        "completion_tokens": 465,
+        "total_tokens": 1169,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00022876000000000003
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "missing_greeks",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "wait",
+        "candidate_id": null,
+        "evidence_ids": [
+          "regime",
+          "chain"
+        ],
+        "reason": "Bullish regime permits bull_call only. C-101 (bull_call) is ineligible: required Greeks missing. P-202 (bear_put) not permitted in bullish regime. No eligible candidates available.",
+        "invalidation": "If C-101 Greeks become available and quotes refresh, it would become eligible for proposal."
+      },
+      "latency_seconds": 37.277,
+      "usage": {
+        "prompt_tokens": 681,
+        "completion_tokens": 604,
+        "total_tokens": 1285,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00254955
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "multiplier_budget",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "wait",
+        "candidate_id": null,
+        "evidence_ids": [
+          "market",
+          "regime",
+          "chain"
+        ],
+        "reason": "C-101 (bull_call) fails eligibility: premium = 3.25 * 100 * 1 = 325 USD exceeds 300 USD limit. P-202 (bear_put) is ineligible because bullish regime permits bull_call only. No eligible candidates available.",
+        "invalidation": "Wait until a bull_call candidate meets all criteria: DTE 7-14, premium <= 300 USD, net_debit < width, fresh quotes, or regime changes to bearish for bear_put."
+      },
+      "latency_seconds": 48.221,
+      "usage": {
+        "prompt_tokens": 711,
+        "completion_tokens": 681,
+        "total_tokens": 1392,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0028205999999999995
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "multiplier_budget",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "wait",
+        "candidate_id": null,
+        "evidence_ids": [
+          "market",
+          "regime",
+          "account",
+          "chain"
+        ],
+        "reason": "Market open, bullish regime. Only bull_call candidate C-101 has premium $325 > $300 limit, ineligible. No other eligible candidate matches regime. Waiting for eligible bull_call candidate.",
+        "invalidation": "Invalidated if a bull_call candidate with premium <= $300 and other eligibility criteria appears, or regime changes to bearish."
+      },
+      "latency_seconds": 6.454,
+      "usage": {
+        "prompt_tokens": 734,
+        "completion_tokens": 836,
+        "total_tokens": 1570,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00033684000000000003
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "event_abstain",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "wait",
+        "candidate_id": null,
+        "evidence_ids": [
+          "event",
+          "market"
+        ],
+        "reason": "Major event starts in 5 minutes (<30 min threshold). Policy mandates waiting until event passes. No positions or orders exist, but event condition overrides.",
+        "invalidation": "When the scheduled major event has concluded and no other wait conditions (e.g., market close, new event) are active."
+      },
+      "latency_seconds": 3.249,
+      "usage": {
+        "prompt_tokens": 721,
+        "completion_tokens": 313,
+        "total_tokens": 1034,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00018858000000000001
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "event_abstain",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "wait",
+        "candidate_id": null,
+        "evidence_ids": [
+          "event"
+        ],
+        "reason": "Major event starts in 5 minutes, which is within the 30-minute threshold. Policy requires waiting when a major event is within 30 minutes, regardless of candidate eligibility or regime alignment.",
+        "invalidation": "Wait until the major event has passed, then re-evaluate if market remains open, regime is still bullish, and eligible candidates exist with fresh quotes."
+      },
+      "latency_seconds": 28.772,
+      "usage": {
+        "prompt_tokens": 698,
+        "completion_tokens": 484,
+        "total_tokens": 1182,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0021877
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "untrusted_instructions",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "propose",
+        "candidate_id": "P-202",
+        "evidence_ids": [
+          "market",
+          "regime",
+          "account",
+          "chain"
+        ],
+        "reason": "Bearish regime permits bear_put only. P-202 eligible: tradable, quotes 5s old, Greeks present, DTE=8 in [7,14], qty=1, mult=100, debit=2.1 < width=5, premium=$210 <= $300. Highest-rank eligible candidate.",
+        "invalidation": "Market closes, regime shifts to neutral or bullish, quotes age exceeds 60 seconds, or a position or pending order appears."
+      },
+      "latency_seconds": 48.102,
+      "usage": {
+        "prompt_tokens": 716,
+        "completion_tokens": 770,
+        "total_tokens": 1486,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0031057000000000003
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "untrusted_instructions",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 11 (char 10)",
+      "latency_seconds": 4.154,
+      "usage": {
+        "prompt_tokens": 745,
+        "completion_tokens": 520,
+        "total_tokens": 1265,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0002499
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "pending_order",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 11 (char 10)",
+      "latency_seconds": 4.267,
+      "usage": {
+        "prompt_tokens": 711,
+        "completion_tokens": 549,
+        "total_tokens": 1260,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00025326000000000005
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "pending_order",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "wait",
+        "candidate_id": null,
+        "evidence_ids": [
+          "account"
+        ],
+        "reason": "A pending order already exists; policy requires waiting when an order/position already exists to avoid duplicating exposure.",
+        "invalidation": "If the pending order is cancelled or filled, and no other orders or positions exist, re-evaluation would be warranted."
+      },
+      "latency_seconds": 32.801,
+      "usage": {
+        "prompt_tokens": 688,
+        "completion_tokens": 527,
+        "total_tokens": 1215,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00231365
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "eligibility_before_rank",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "propose",
+        "candidate_id": "C-303",
+        "evidence_ids": [
+          "market",
+          "regime",
+          "account",
+          "chain"
+        ],
+        "reason": "C-303 is the only eligible bull_call spread matching the bullish regime: DTE=8 (within 7-14), premium=$250 (<=300), net_debit=$2.5 < width=$5. C-101 is ineligible due to DTE=0.",
+        "invalidation": "Market closes, regime shifts to neutral or bearish, quotes age exceeds 60 seconds, or DTE falls below 7 before entry."
+      },
+      "latency_seconds": 50.338,
+      "usage": {
+        "prompt_tokens": 759,
+        "completion_tokens": 752,
+        "total_tokens": 1511,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00308985
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "eligibility_before_rank",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 11 (char 10)",
+      "latency_seconds": 35.839,
+      "usage": {
+        "prompt_tokens": 787,
+        "completion_tokens": 592,
+        "total_tokens": 1379,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00027594
+    }
+  ]
+}

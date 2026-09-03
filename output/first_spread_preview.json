@@ -1,0 +1,116 @@
+{
+  "generated_at": "2026-09-03T03:32:16.547371+00:00",
+  "mode": "offline_preview",
+  "decision": "WAIT",
+  "reason": "Saved after-hours data cannot authorize an order; refresh market/account state and assess regime first.",
+  "feed": "indicative",
+  "mathematically_eligible_drafts": 47,
+  "examples": [
+    {
+      "id": "19bd01e91b4e1cc1ddba",
+      "kind": "bull_call",
+      "expiration": "2026-09-11",
+      "dte_at_snapshot": 9,
+      "long_strike": "766",
+      "short_strike": "771",
+      "net_debit": "2.57",
+      "premium_usd": "257.00",
+      "expiration_max_profit_before_costs_usd": "243.00",
+      "greeks_per_share": {
+        "delta": 0.1557,
+        "gamma": 0.0002,
+        "theta": -0.0549,
+        "vega": 0.0375,
+        "rho": 0.0288
+      },
+      "quote_timestamps": [
+        "2026-09-02T19:59:59.27818788Z",
+        "2026-09-02T19:59:59.975612141Z"
+      ],
+      "blockers": [
+        "market_closed_in_saved_clock",
+        "saved_clock_requires_refresh",
+        "option_quotes_require_refresh",
+        "saved_account_state_requires_refresh",
+        "no_current_regime_or_event_assessment"
+      ],
+      "selection_distance": 0.0011999999999999789,
+      "order_draft": {
+        "order_class": "mleg",
+        "qty": "1",
+        "type": "limit",
+        "time_in_force": "day",
+        "limit_price": "2.57",
+        "client_order_id": "preview-19bd01e91b4e1cc1ddba",
+        "legs": [
+          {
+            "symbol": "SPY260911C00766000",
+            "ratio_qty": "1",
+            "side": "buy",
+            "position_intent": "buy_to_open"
+          },
+          {
+            "symbol": "SPY260911C00771000",
+            "ratio_qty": "1",
+            "side": "sell",
+            "position_intent": "sell_to_open"
+          }
+        ]
+      }
+    },
+    {
+      "id": "aaf00d50ce85556a0d18",
+      "kind": "bear_put",
+      "expiration": "2026-09-11",
+      "dte_at_snapshot": 9,
+      "long_strike": "766",
+      "short_strike": "761",
+      "net_debit": "1.81",
+      "premium_usd": "181.00",
+      "expiration_max_profit_before_costs_usd": "319.00",
+      "greeks_per_share": {
+        "delta": -0.1386,
+        "gamma": 0.0042,
+        "theta": 0.0174,
+        "vega": 0.0285,
+        "rho": -0.0265
+      },
+      "quote_timestamps": [
+        "2026-09-02T19:59:59.259764768Z",
+        "2026-09-02T19:59:59.583421003Z"
+      ],
+      "blockers": [
+        "market_closed_in_saved_clock",
+        "saved_clock_requires_refresh",
+        "option_quotes_require_refresh",
+        "saved_account_state_requires_refresh",
+        "no_current_regime_or_event_assessment"
+      ],
+      "selection_distance": 0.0014999999999999458,
+      "order_draft": {
+        "order_class": "mleg",
+        "qty": "1",
+        "type": "limit",
+        "time_in_force": "day",
+        "limit_price": "1.81",
+        "client_order_id": "preview-aaf00d50ce85556a0d18",
+        "legs": [
+          {
+            "symbol": "SPY260911P00766000",
+            "ratio_qty": "1",
+            "side": "buy",
+            "position_intent": "buy_to_open"
+          },
+          {
+            "symbol": "SPY260911P00761000",
+            "ratio_qty": "1",
+            "side": "sell",
+            "position_intent": "sell_to_open"
+          }
+        ]
+      }
+    }
+  ],
+  "order_submission_enabled": false,
+  "note": "Expiration payoff calculations exclude fees and execution/assignment complications. These drafts are not live trade recommendations."
+}

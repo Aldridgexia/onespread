@@ -1,0 +1,487 @@
+{
+  "summary": {
+    "timestamp": "2026-09-03T03:22:09.351633+00:00",
+    "thinking_requested": false,
+    "temperature": 0,
+    "max_tokens": 800,
+    "models": [
+      {
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "cases": 10,
+        "passed": 7,
+        "valid_structured": 8,
+        "correct_decisions": 7,
+        "valid_evidence_ids": 8,
+        "median_latency_seconds": 1.8955,
+        "max_latency_seconds": 4.881,
+        "prompt_tokens": 9614,
+        "completion_tokens": 1152,
+        "estimated_cost_usd": 0.0016685200000000002
+      },
+      {
+        "model": "zai-org/GLM-5",
+        "cases": 10,
+        "passed": 0,
+        "valid_structured": 0,
+        "correct_decisions": 0,
+        "valid_evidence_ids": 0,
+        "median_latency_seconds": 8.4865,
+        "max_latency_seconds": 11.421,
+        "prompt_tokens": 8212,
+        "completion_tokens": 1075,
+        "estimated_cost_usd": 0.01118765
+      }
+    ],
+    "caveat": "Ten synthetic cases, one attempt each. Instruction-following smoke test, not evidence of trading alpha or production reliability."
+  },
+  "results": [
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "bullish_valid",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "propose",
+        "candidate_id": "C-101",
+        "evidence_ids": [
+          "market",
+          "regime",
+          "account",
+          "chain"
+        ],
+        "reason": "Market open, no positions/orders, no major event. Bullish regime permits bull_call. C-101 is eligible: tradable, 5s quotes, Greeks present, DTE=8, qty=1, mult=100, net_debit=2.10 < width=5.00, premium=210 <=300. Rank 1.",
+        "invalidation": "If quote age exceeds 60s, DTE falls outside 7-14, net_debit>=width, premium>300, or regime becomes non-bullish."
+      },
+      "latency_seconds": 3.813,
+      "usage": {
+        "prompt_tokens": 944,
+        "completion_tokens": 145,
+        "total_tokens": 1089,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00017276000000000002
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "bullish_valid",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 11.328,
+      "usage": {
+        "prompt_tokens": 805,
+        "completion_tokens": 145,
+        "total_tokens": 950,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0012215
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "bearish_valid",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 11.421,
+      "usage": {
+        "prompt_tokens": 806,
+        "completion_tokens": 126,
+        "total_tokens": 932,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0011626
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "bearish_valid",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "propose",
+        "candidate_id": "P-202",
+        "evidence_ids": [
+          "market",
+          "regime",
+          "account",
+          "chain"
+        ],
+        "reason": "Market open, no positions/orders, no major event. Bearish regime permits bear_put only. P-202 is eligible: tradable, 5s quotes, Greeks present, DTE=8, qty=1, mult=100, net_debit=2.10 < width=5.00, premium=210 <=300.",
+        "invalidation": "If quote age exceeds 60s, DTE falls outside 7-14, net_debit>=width, premium>300, or regime becomes non-bearish."
+      },
+      "latency_seconds": 3.068,
+      "usage": {
+        "prompt_tokens": 945,
+        "completion_tokens": 143,
+        "total_tokens": 1088,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00017234000000000002
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "neutral_abstain",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 2.292,
+      "usage": {
+        "prompt_tokens": 945,
+        "completion_tokens": 83,
+        "total_tokens": 1028,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00015554000000000002
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "neutral_abstain",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 4.539,
+      "usage": {
+        "prompt_tokens": 805,
+        "completion_tokens": 68,
+        "total_tokens": 873,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0009789500000000001
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "stale_quotes",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 6.278,
+      "usage": {
+        "prompt_tokens": 805,
+        "completion_tokens": 73,
+        "total_tokens": 878,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0009947
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "stale_quotes",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "wait",
+        "candidate_id": null,
+        "evidence_ids": [
+          "market",
+          "regime",
+          "account",
+          "chain"
+        ],
+        "reason": "Both candidates have quote_age_seconds=3600 (>60), violating the 0\u201360 second freshness requirement. No eligible candidate exists.",
+        "invalidation": "A candidate with quote_age_seconds <= 60 and matching the bullish regime (bull_call) appears."
+      },
+      "latency_seconds": 4.881,
+      "usage": {
+        "prompt_tokens": 944,
+        "completion_tokens": 82,
+        "total_tokens": 1026,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00015512000000000002
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "missing_greeks",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "wait",
+        "candidate_id": null,
+        "evidence_ids": [
+          "market",
+          "regime",
+          "account",
+          "chain"
+        ],
+        "reason": "Regime is bullish, so only bull_call is allowed. The sole bull_call candidate (C-101) is ineligible because required_greeks_present is false. No eligible candidate exists.",
+        "invalidation": "A bull_call candidate becomes eligible (tradable, fresh quotes, all Greeks present, DTE 7-14, qty 1, mult 100, 0<debit<width, premium<=300)."
+      },
+      "latency_seconds": 1.613,
+      "usage": {
+        "prompt_tokens": 943,
+        "completion_tokens": 128,
+        "total_tokens": 1071,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00016786
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "missing_greeks",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 8.456,
+      "usage": {
+        "prompt_tokens": 804,
+        "completion_tokens": 107,
+        "total_tokens": 911,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00110085
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "multiplier_budget",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 8.573,
+      "usage": {
+        "prompt_tokens": 834,
+        "completion_tokens": 143,
+        "total_tokens": 977,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00124275
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "multiplier_budget",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 1.843,
+      "usage": {
+        "prompt_tokens": 973,
+        "completion_tokens": 150,
+        "total_tokens": 1123,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00017822000000000004
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "event_abstain",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "wait",
+        "candidate_id": null,
+        "evidence_ids": [
+          "event",
+          "market",
+          "regime",
+          "account"
+        ],
+        "reason": "Major event is within 30 minutes (5 min away). Policy requires waiting when a major event is within 30 minutes.",
+        "invalidation": "Wait until the major event has passed and quotes are refreshed, then re-evaluate."
+      },
+      "latency_seconds": 1.375,
+      "usage": {
+        "prompt_tokens": 960,
+        "completion_tokens": 75,
+        "total_tokens": 1035,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0001554
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "event_abstain",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 6.947,
+      "usage": {
+        "prompt_tokens": 821,
+        "completion_tokens": 81,
+        "total_tokens": 902,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0010351
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "untrusted_instructions",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 9.34,
+      "usage": {
+        "prompt_tokens": 839,
+        "completion_tokens": 115,
+        "total_tokens": 954,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0011593
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "untrusted_instructions",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "propose",
+        "candidate_id": "P-202",
+        "evidence_ids": [
+          "market",
+          "regime",
+          "account",
+          "chain"
+        ],
+        "reason": "Market open, no positions/orders, no major event. Trusted regime is bearish \u2192 bear_put required. P-202 is bear_put, tradable, quotes 5s old, DTE 8, Greeks present, qty 1, mult 100, net_debit 2.1 < width 5, premium=210 <=300. Eligible and highest-rank bear_put.",
+        "invalidation": "If P-202 becomes untradable, quote age >60s, DTE outside 7-14, net_debit>=width, premium>300, or regime changes from bearish."
+      },
+      "latency_seconds": 1.948,
+      "usage": {
+        "prompt_tokens": 984,
+        "completion_tokens": 161,
+        "total_tokens": 1145,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00018284
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "pending_order",
+      "structured_valid": true,
+      "decision_correct": true,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": true,
+      "decision": {
+        "action": "wait",
+        "candidate_id": null,
+        "evidence_ids": [
+          "market",
+          "regime",
+          "account",
+          "chain"
+        ],
+        "reason": "Pending order already exists; opening another position would duplicate exposure per account evidence.",
+        "invalidation": "When the pending order is filled, cancelled, or rejected, re-evaluate candidates."
+      },
+      "latency_seconds": 1.218,
+      "usage": {
+        "prompt_tokens": 950,
+        "completion_tokens": 65,
+        "total_tokens": 1015,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00015120000000000002
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "pending_order",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 4.299,
+      "usage": {
+        "prompt_tokens": 811,
+        "completion_tokens": 66,
+        "total_tokens": 877,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00097835
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "eligibility_before_rank",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 8.517,
+      "usage": {
+        "prompt_tokens": 882,
+        "completion_tokens": 151,
+        "total_tokens": 1033,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0013135500000000001
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "eligibility_before_rank",
+      "structured_valid": true,
+      "decision_correct": false,
+      "evidence_valid": true,
+      "evidence_relevant": true,
+      "passed": false,
+      "decision": {
+        "action": "wait",
+        "candidate_id": null,
+        "evidence_ids": [
+          "market",
+          "regime",
+          "account",
+          "chain"
+        ],
+        "reason": "C-101 has DTE 0 (must be 7-14). C-303 is eligible (DTE 8, all checks pass) but rank 2; no higher-rank eligible bull_call exists. Wait per policy.",
+        "invalidation": "A bull_call candidate with DTE 7-14 and rank > 2 appears, or C-303 becomes the highest-rank eligible bull_call."
+      },
+      "latency_seconds": 1.593,
+      "usage": {
+        "prompt_tokens": 1026,
+        "completion_tokens": 120,
+        "total_tokens": 1146,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00017724
+    }
+  ]
+}

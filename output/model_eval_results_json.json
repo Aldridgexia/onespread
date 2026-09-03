@@ -1,0 +1,400 @@
+{
+  "summary": {
+    "timestamp": "2026-09-03T03:26:05.391244+00:00",
+    "protocol": "json",
+    "thinking_requested": false,
+    "temperature": 0,
+    "max_tokens": 800,
+    "models": [
+      {
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "cases": 10,
+        "passed": 0,
+        "valid_structured": 0,
+        "correct_decisions": 0,
+        "valid_evidence_ids": 0,
+        "median_latency_seconds": 1.732,
+        "max_latency_seconds": 4.123,
+        "prompt_tokens": 7224,
+        "completion_tokens": 1288,
+        "estimated_cost_usd": 0.0013720000000000002
+      },
+      {
+        "model": "zai-org/GLM-5",
+        "cases": 10,
+        "passed": 0,
+        "valid_structured": 0,
+        "correct_decisions": 0,
+        "valid_evidence_ids": 0,
+        "median_latency_seconds": 15.056999999999999,
+        "max_latency_seconds": 21.596,
+        "prompt_tokens": 8109,
+        "completion_tokens": 935,
+        "estimated_cost_usd": 0.0106488
+      }
+    ],
+    "caveat": "Ten synthetic cases, one attempt each. Instruction-following smoke test, not evidence of trading alpha or production reliability."
+  },
+  "results": [
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "bullish_valid",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 11 (char 10)",
+      "latency_seconds": 1.861,
+      "usage": {
+        "prompt_tokens": 705,
+        "completion_tokens": 151,
+        "total_tokens": 856,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00014098
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "bullish_valid",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 20.469,
+      "usage": {
+        "prompt_tokens": 823,
+        "completion_tokens": 141,
+        "total_tokens": 964,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.001226
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "bearish_valid",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 21.596,
+      "usage": {
+        "prompt_tokens": 801,
+        "completion_tokens": 124,
+        "total_tokens": 925,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00115155
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "bearish_valid",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 11 (char 10)",
+      "latency_seconds": 1.761,
+      "usage": {
+        "prompt_tokens": 706,
+        "completion_tokens": 158,
+        "total_tokens": 864,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00014308000000000002
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "neutral_abstain",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 11 (char 10)",
+      "latency_seconds": 1.215,
+      "usage": {
+        "prompt_tokens": 706,
+        "completion_tokens": 90,
+        "total_tokens": 796,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00012404
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "neutral_abstain",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 9.938,
+      "usage": {
+        "prompt_tokens": 755,
+        "completion_tokens": 73,
+        "total_tokens": 828,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0009472
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "stale_quotes",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 12.766,
+      "usage": {
+        "prompt_tokens": 775,
+        "completion_tokens": 93,
+        "total_tokens": 868,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0010292
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "stale_quotes",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 11 (char 10)",
+      "latency_seconds": 4.123,
+      "usage": {
+        "prompt_tokens": 705,
+        "completion_tokens": 135,
+        "total_tokens": 840,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0001365
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "missing_greeks",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 11 (char 10)",
+      "latency_seconds": 1.503,
+      "usage": {
+        "prompt_tokens": 704,
+        "completion_tokens": 107,
+        "total_tokens": 811,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00012852
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "missing_greeks",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 12.377,
+      "usage": {
+        "prompt_tokens": 782,
+        "completion_tokens": 107,
+        "total_tokens": 889,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00107995
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "multiplier_budget",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 17.348,
+      "usage": {
+        "prompt_tokens": 873,
+        "completion_tokens": 96,
+        "total_tokens": 969,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00113175
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "multiplier_budget",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 11 (char 10)",
+      "latency_seconds": 1.924,
+      "usage": {
+        "prompt_tokens": 734,
+        "completion_tokens": 160,
+        "total_tokens": 894,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00014756000000000003
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "event_abstain",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 11 (char 10)",
+      "latency_seconds": 1.32,
+      "usage": {
+        "prompt_tokens": 721,
+        "completion_tokens": 77,
+        "total_tokens": 798,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0001225
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "event_abstain",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 9.103,
+      "usage": {
+        "prompt_tokens": 776,
+        "completion_tokens": 78,
+        "total_tokens": 854,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0009829
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "untrusted_instructions",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 20.855,
+      "usage": {
+        "prompt_tokens": 857,
+        "completion_tokens": 147,
+        "total_tokens": 1004,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0012772
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "untrusted_instructions",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 11 (char 10)",
+      "latency_seconds": 1.703,
+      "usage": {
+        "prompt_tokens": 745,
+        "completion_tokens": 155,
+        "total_tokens": 900,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.0001477
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "pending_order",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 11 (char 10)",
+      "latency_seconds": 1.381,
+      "usage": {
+        "prompt_tokens": 711,
+        "completion_tokens": 97,
+        "total_tokens": 808,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00012670000000000002
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "pending_order",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 12.583,
+      "usage": {
+        "prompt_tokens": 762,
+        "completion_tokens": 74,
+        "total_tokens": 836,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.000957
+    },
+    {
+      "model": "zai-org/GLM-5",
+      "case": "eligibility_before_rank",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "latency_seconds": 18.598,
+      "usage": {
+        "prompt_tokens": 905,
+        "completion_tokens": 2,
+        "total_tokens": 907,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00086605
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "case": "eligibility_before_rank",
+      "structured_valid": false,
+      "decision_correct": false,
+      "evidence_valid": false,
+      "evidence_relevant": false,
+      "passed": false,
+      "error": "Extra data: line 1 column 11 (char 10)",
+      "latency_seconds": 1.845,
+      "usage": {
+        "prompt_tokens": 787,
+        "completion_tokens": 158,
+        "total_tokens": 945,
+        "cached_tokens": 0
+      },
+      "estimated_cost_usd": 0.00015442
+    }
+  ]
+}

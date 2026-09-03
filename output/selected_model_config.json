@@ -1,0 +1,15 @@
+{
+  "provider": "featherless",
+  "base_url": "https://api.featherless.ai/v1",
+  "model": "zai-org/GLM-5",
+  "request_parameters": {
+    "temperature": 0,
+    "max_tokens": 2048,
+    "chat_template_kwargs": {"enable_thinking": true}
+  },
+  "output_contract": "Parse a single JSON object from message.content and validate locally. Never use reasoning as the decision, repair malformed JSON, or execute model text.",
+  "system_schema_source": "output/model_eval_cases.json",
+  "reference_protocol": "reasoning-json",
+  "stage": "Tested inference configuration; production market-decision prompt still to be implemented.",
+  "quote_policy": "Refresh account state and prices after inference and validate again before any paper order."
+}
