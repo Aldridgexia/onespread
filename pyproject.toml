@@ -1,0 +1,33 @@
+[project]
+name = "onespread"
+version = "0.1.0"
+description = "Paper-only SPY option spreads with auditable AI decisions"
+requires-python = ">=3.12"
+dependencies = [
+    "alpaca-py>=0.44.0",
+    "httpx>=0.28.1",
+    "pydantic>=2.13.5",
+    "python-dotenv>=1.2.3",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.16.6",
+    "ty>=0.0.78",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.ty.environment]
+python-version = "3.12"
+extra-paths = ["scripts"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

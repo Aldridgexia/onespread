@@ -1,10 +1,11 @@
 """Read-only Alpaca discovery using the official CLI and local paper keys."""
+
 from __future__ import annotations
 
 import json
 import os
-from pathlib import Path
 import subprocess
+from pathlib import Path
 from urllib.parse import urlencode
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,18 +27,28 @@ def credentials() -> dict[str, str]:
         raise RuntimeError("Complete both credentials in the local .env file.")
     env = {k: v for k, v in os.environ.items() if not k.startswith("ALPACA_")}
     env.update({k: values[k] for k in ("ALPACA_API_KEY", "ALPACA_SECRET_KEY")})
-    env.update(ALPACA_LIVE_TRADE="false", ALPACA_PAPER_TRADE="true",
-               ALPACA_CONFIG_DIR=str(ROOT / ".local" / "alpaca-config"))
+    env.update(
+        ALPACA_LIVE_TRADE="false",
+        ALPACA_PAPER_TRADE="true",
+        ALPACA_CONFIG_DIR=str(ROOT / ".local" / "alpaca-config"),
+    )
     return env
 
 
 def get(path: str, params: dict | None = None, *, data: bool = False):
     """Only GET, fixed paper/data destinations, captured and redacted errors."""
     allowed = (
-        "/v2/account", "/v2/account/configurations", "/v2/clock", "/v2/assets",
-        "/v2/positions", "/v2/orders", "/v2/options/contracts",
-        "/v2/stocks/snapshots", "/v2/stocks/quotes/latest",
-        "/v1beta1/options/trades", "/v1beta1/options/bars",
+        "/v2/account",
+        "/v2/account/configurations",
+        "/v2/clock",
+        "/v2/assets",
+        "/v2/positions",
+        "/v2/orders",
+        "/v2/options/contracts",
+        "/v2/stocks/snapshots",
+        "/v2/stocks/quotes/latest",
+        "/v1beta1/options/trades",
+        "/v1beta1/options/bars",
     )
     if path not in allowed and not (
         path.startswith("/v1beta1/options/snapshots/")
@@ -45,8 +56,7 @@ def get(path: str, params: dict | None = None, *, data: bool = False):
     ):
         raise ValueError("Endpoint is outside discovery's GET allowlist.")
     env = credentials()
-    command = [str(ROOT / ".local/bin/alpaca"), "api", "GET", path,
-               "--quiet", "--timeout", "40"]
+    command = [str(ROOT / ".local/bin/alpaca"), "api", "GET", path, "--quiet", "--timeout", "40"]
     if params:
         command += ["--query", urlencode(params)]
     if data:
@@ -69,10 +79,22 @@ def save(name: str, value):
 
 
 def account_summary(account):
-    fields = ("status", "currency", "cash", "equity", "buying_power",
-              "options_buying_power", "options_approved_level", "options_trading_level",
-              "trading_blocked", "account_blocked", "trade_suspended_by_user",
-              "created_at", "pattern_day_trader", "daytrade_count")
+    fields = (
+        "status",
+        "currency",
+        "cash",
+        "equity",
+        "buying_power",
+        "options_buying_power",
+        "options_approved_level",
+        "options_trading_level",
+        "trading_blocked",
+        "account_blocked",
+        "trade_suspended_by_user",
+        "created_at",
+        "pattern_day_trader",
+        "daytrade_count",
+    )
     result = {k: account.get(k) for k in fields}
     result["account_id_suffix"] = str(account.get("id", ""))[-6:]
     result["endpoint"] = "https://paper-api.alpaca.markets"
@@ -81,6 +103,7 @@ def account_summary(account):
 
 if __name__ == "__main__":
     import sys
+
     mode = sys.argv[1] if len(sys.argv) > 1 else "account"
     if mode == "account":
         result = account_summary(get("/v2/account"))
@@ -89,17 +112,27 @@ if __name__ == "__main__":
     elif mode == "assets":
         assets = get("/v2/assets", {"status": "active", "attributes": "options_enabled"})
         save("assets.json", assets)
-        result = {"count": len(assets), "tradable": sum(bool(a.get("tradable")) for a in assets),
-                  "sample": [{k: a.get(k) for k in ("symbol", "name", "exchange", "attributes")}
-                             for a in assets[:3]],
-                  "selected": [{k: a.get(k) for k in ("symbol", "exchange", "attributes", "tradable")}
-                               for a in assets if a.get("symbol") in ("SPY", "QQQ", "IWM", "AAPL", "NVDA", "SPX", "VIX", "XSP") ]}
+        result = {
+            "count": len(assets),
+            "tradable": sum(bool(a.get("tradable")) for a in assets),
+            "sample": [
+                {k: a.get(k) for k in ("symbol", "name", "exchange", "attributes")}
+                for a in assets[:3]
+            ],
+            "selected": [
+                {k: a.get(k) for k in ("symbol", "exchange", "attributes", "tradable")}
+                for a in assets
+                if a.get("symbol") in ("SPY", "QQQ", "IWM", "AAPL", "NVDA", "SPX", "VIX", "XSP")
+            ],
+        }
     elif mode == "scan":
         from discover_options import scan
+
         scan()
         raise SystemExit(0)
     elif mode == "history":
         from discover_options import probe_history
+
         probe_history()
         raise SystemExit(0)
     else:
