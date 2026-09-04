@@ -1,5 +1,7 @@
 # OneSpread | Four-minute demo video
 
+The produced [MP4](OneSpread-demo.mp4) runs approximately 4:17. It uses synthetic narration, captioned slides, and captured dashboard replay views. The [final narration](video_narration.txt) includes the 09:38 ET paper-attempt status. The outline below remains available for a human-recorded version.
+
 Target: 4:00, 1920×1080 landscape, MP4. Keep the synthetic-data labels visible. Use the local dashboard at `http://127.0.0.1:8765` after `make dashboard`; this walkthrough needs no keys. Record the screen and narration together. Have the six-slide PDF and public repository ready in separate tabs.
 
 ## 0:00–0:25 | The problem and the project

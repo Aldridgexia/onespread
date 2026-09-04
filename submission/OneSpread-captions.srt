@@ -1,0 +1,199 @@
+1
+00:00:00,000 --> 00:00:09,071
+Meet One Spread, a paper-only SPY options agent built by a solo
+quant developer. It makes the evidence, the model proposal, and the
+
+2
+00:00:09,071 --> 00:00:11,217
+execution decision inspectable.
+
+3
+00:00:11,717 --> 00:00:19,848
+An options trading agent can give a convincing explanation while
+relying on prices that have already changed. One Spread focuses on
+
+4
+00:00:19,848 --> 00:00:22,393
+that gap between a proposal and an order.
+
+5
+00:00:22,893 --> 00:00:31,409
+The strategy is deliberately narrow: bull call or bear put debit
+spreads, seven to fourteen days to expiry, with a five-point strike
+
+6
+00:00:31,409 --> 00:00:33,409
+width and one contract per leg.
+
+7
+00:00:33,909 --> 00:00:43,231
+Only one spread can be active, with at most three hundred dollars of
+entry premium before costs. This chart is a hypothetical expiration
+
+8
+00:00:43,231 --> 00:00:48,714
+payoff, not realized performance. Assignment and execution
+complications remain.
+
+9
+00:00:49,214 --> 00:00:57,407
+Here is the actual dashboard, showing a synthetic replay. The model
+decision is scripted and the broker is simulated. The replay runs
+
+10
+00:00:57,407 --> 00:01:00,980
+through the same execution engine used by the paper agent.
+
+11
+00:01:01,480 --> 00:01:09,215
+In the real integration, the official Alpaca command-line tool
+supplies market and account reads. G L M five runs through
+
+12
+00:01:09,215 --> 00:01:13,306
+Featherless and proposes an eligible spread, or chooses to wait.
+
+13
+00:01:13,806 --> 00:01:22,483
+The model cites supplied evidence, including a simple momentum
+classification and news headlines. It cannot call the broker, set
+
+14
+00:01:22,483 --> 00:01:25,669
+position size, or override the numerical rules.
+
+15
+00:01:26,169 --> 00:01:35,822
+After inference, code refreshes quotes, context, and account state.
+It checks price deterioration, existing exposure, quote freshness,
+
+16
+00:01:35,822 --> 00:01:40,072
+and reviewed event-calendar coverage before allowing entry.
+
+17
+00:01:40,572 --> 00:01:49,107
+In a small synthetic integration evaluation, the selected hosted
+model configuration passed ten of ten cases, with a median response
+
+18
+00:01:49,107 --> 00:01:54,732
+time of about thirty-nine seconds. That latency made refreshing the
+evidence essential.
+
+19
+00:01:55,232 --> 00:02:04,222
+Now look at the stale-quote scenario. The quote is too old, so the
+execution gate returns WAIT with an explicit reason. No new order is
+
+20
+00:02:04,222 --> 00:02:04,954
+authorized.
+
+21
+00:02:05,454 --> 00:02:13,841
+A clear refusal is part of the product. This result is reproducible
+without credentials, and it does not depend on trusting the model to
+
+22
+00:02:13,841 --> 00:02:15,260
+enforce the risk limit.
+
+23
+00:02:15,760 --> 00:02:24,193
+The next replay follows a simulated order lifecycle. Before sending
+a paper order, the engine commits a durable intent to its local
+
+24
+00:02:24,193 --> 00:02:24,708
+journal.
+
+25
+00:02:25,208 --> 00:02:33,117
+If an acknowledgement is lost, it reconciles the broker state
+instead of blindly resubmitting. An accepted order is still not a
+
+26
+00:02:33,117 --> 00:02:34,051
+confirmed fill.
+
+27
+00:02:34,551 --> 00:02:42,695
+Once the owned spread is confirmed, subsequent cycles check the
+account and manage the position. Unexpected positions and partial
+
+28
+00:02:42,695 --> 00:02:44,779
+fills require operator attention.
+
+29
+00:02:45,279 --> 00:02:53,507
+The engine can submit a closing limit when its exit conditions are
+reached. A limit order may remain unfilled, so the process must stay
+
+30
+00:02:53,507 --> 00:02:55,214
+running to manage its state.
+
+31
+00:02:55,714 --> 00:03:04,217
+Completion requires a confirmed exit fill and a flat account. All
+the broker transitions shown here are simulated, and do not prove an
+
+32
+00:03:04,217 --> 00:03:05,740
+actual paper round trip.
+
+33
+00:03:06,240 --> 00:03:14,149
+The decision journal lets a reviewer follow the sequence and its
+recorded reasons. The local dashboard is read-only: refreshing it
+
+34
+00:03:14,149 --> 00:03:15,549
+does not place a trade.
+
+35
+00:03:16,049 --> 00:03:24,911
+What has been exercised? Alpaca read access, paid Featherless
+inference, twenty-two offline tests, and three synthetic replay
+
+36
+00:03:24,911 --> 00:03:29,308
+scenarios. Real broker submission and fills remain unverified.
+
+37
+00:03:29,808 --> 00:03:37,920
+At nine thirty-eight Eastern on September fourth, a guarded paper
+cycle submitted no order. The market was open, but only eight of the
+
+38
+00:03:37,920 --> 00:03:41,250
+required twenty-one session minute bars were available.
+
+39
+00:03:41,750 --> 00:03:50,243
+Basic options quotes are indicative, and the momentum rule is
+uncalibrated. There is no measured trading edge, backtest return, or
+
+40
+00:03:50,243 --> 00:03:51,550
+profitability claim.
+
+41
+00:03:52,050 --> 00:04:00,050
+The source is public and M I T licensed. Clone the repository and
+run the replay dashboard without keys, then connect an approved
+
+42
+00:04:00,050 --> 00:04:02,530
+paper account for the local integration.
+
+43
+00:04:03,030 --> 00:04:12,031
+Next comes a monitored paper round trip, followed by executable-data
+validation and out-of-sample strategy research. One Spread makes the
+
+44
+00:04:12,031 --> 00:04:16,038
+proposal, the veto, and the order state visible in one place.

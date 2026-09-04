@@ -1,0 +1,47 @@
+OneSpread demo narration
+Synthetic voice: macOS Samantha. Screen captures: local synthetic replay.
+Status checked September 4, 2026 at 09:38 ET.
+
+Meet One Spread, a paper-only SPY options agent built by a solo quant developer. It makes the evidence, the model proposal, and the execution decision inspectable.
+
+An options trading agent can give a convincing explanation while relying on prices that have already changed. One Spread focuses on that gap between a proposal and an order.
+
+The strategy is deliberately narrow: bull call or bear put debit spreads, seven to fourteen days to expiry, with a five-point strike width and one contract per leg.
+
+Only one spread can be active, with at most three hundred dollars of entry premium before costs. This chart is a hypothetical expiration payoff, not realized performance. Assignment and execution complications remain.
+
+Here is the actual dashboard, showing a synthetic replay. The model decision is scripted and the broker is simulated. The replay runs through the same execution engine used by the paper agent.
+
+In the real integration, the official Alpaca command-line tool supplies market and account reads. G L M five runs through Featherless and proposes an eligible spread, or chooses to wait.
+
+The model cites supplied evidence, including a simple momentum classification and news headlines. It cannot call the broker, set position size, or override the numerical rules.
+
+After inference, code refreshes quotes, context, and account state. It checks price deterioration, existing exposure, quote freshness, and reviewed event-calendar coverage before allowing entry.
+
+In a small synthetic integration evaluation, the selected hosted model configuration passed ten of ten cases, with a median response time of about thirty-nine seconds. That latency made refreshing the evidence essential.
+
+Now look at the stale-quote scenario. The quote is too old, so the execution gate returns WAIT with an explicit reason. No new order is authorized.
+
+A clear refusal is part of the product. This result is reproducible without credentials, and it does not depend on trusting the model to enforce the risk limit.
+
+The next replay follows a simulated order lifecycle. Before sending a paper order, the engine commits a durable intent to its local journal.
+
+If an acknowledgement is lost, it reconciles the broker state instead of blindly resubmitting. An accepted order is still not a confirmed fill.
+
+Once the owned spread is confirmed, subsequent cycles check the account and manage the position. Unexpected positions and partial fills require operator attention.
+
+The engine can submit a closing limit when its exit conditions are reached. A limit order may remain unfilled, so the process must stay running to manage its state.
+
+Completion requires a confirmed exit fill and a flat account. All the broker transitions shown here are simulated, and do not prove an actual paper round trip.
+
+The decision journal lets a reviewer follow the sequence and its recorded reasons. The local dashboard is read-only: refreshing it does not place a trade.
+
+What has been exercised? Alpaca read access, paid Featherless inference, twenty-two offline tests, and three synthetic replay scenarios. Real broker submission and fills remain unverified.
+
+At nine thirty-eight Eastern on September fourth, a guarded paper cycle submitted no order. The market was open, but only eight of the required twenty-one session minute bars were available.
+
+Basic options quotes are indicative, and the momentum rule is uncalibrated. There is no measured trading edge, backtest return, or profitability claim.
+
+The source is public and M I T licensed. Clone the repository and run the replay dashboard without keys, then connect an approved paper account for the local integration.
+
+Next comes a monitored paper round trip, followed by executable-data validation and out-of-sample strategy research. One Spread makes the proposal, the veto, and the order state visible in one place.

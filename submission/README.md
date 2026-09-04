@@ -10,6 +10,8 @@ Prepared September 4, 2026 for the [Alpaca AI Trading Agents Hackathon](https://
 - [Editable slides, PPTX](OneSpread.pptx): same six slides with speaker notes and an editable payoff chart.
 - [Cover image](cover.png): 16:9 first-slide export.
 - [Video outline and narration](video_outline.md): a four-minute recording plan.
+- [Captioned demo video](OneSpread-demo.mp4): 4 minutes 17 seconds, 1080p, with synthetic narration and captured replay views.
+- [Video captions](OneSpread-captions.srt) and [final narration](video_narration.txt).
 - [Technical brief](technical_onepager.md): AI logic, risk controls, infrastructure, and evidence status.
 
 ## Finish before submitting
@@ -17,13 +19,15 @@ Prepared September 4, 2026 for the [Alpaca AI Trading Agents Hackathon](https://
 1. Confirm the deadline and required fields in the event's submission portal. The public event page lists September 4 as its final day; this package does not establish an exact submission cut-off.
 2. Confirm the solo team is registered. General lablab guidance requires team membership even for solo entrants.
 3. Arrange judge access to the [hosted demo](https://onespread-options-lab.alxia-biz.chatgpt.site/). It is currently private. Test access while signed out after changing access. The hosted experience is synthetic replay; the real agent runs locally.
-4. Record and upload the MP4 using the outline. Target four minutes and stay within the five-minute guidance. The outline is ready; a video file has not been recorded.
+4. Review and upload `OneSpread-demo.mp4`. It uses the installed macOS Samantha synthetic voice, slide renders, and screen captures from the real local dashboard's simulated replay. It is an edited narrated walkthrough, not a continuous live trading recording. Captions are burned into the picture; the separate SRT is also supplied.
 5. Upload the PDF and cover, paste the text, and add the repository and accessible demo links. Enter the dedicated paper account ID only in the organizer's private field if requested. Never publish credentials or the private journal.
 6. Review the status disclosure below, then submit the form. This package does not submit the entry automatically.
 
 ## Evidence status at preparation
 
 Alpaca read access and paid Featherless inference have succeeded. The repository has offline risk/lifecycle tests and three synthetic dashboard replays. Broker submission, fills, and a real paper round trip remain unverified; no broker order has been submitted during development. There is no measured alpha, backtest return, or realized P&L claim.
+
+The video includes the September 4, 2026, 09:38 ET paper-cycle attempt: the account was eligible and the market open, but only eight of the required 21 session minute bars were available. No order was submitted; read-only verification found no positions, open orders, or reserved entry attempt.
 
 If a paper rehearsal completes later, add its time, redacted broker evidence, and outcome before changing the claims. A simulated replay cannot be relabeled as a broker fill.
 
