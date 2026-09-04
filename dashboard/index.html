@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Inspect AI option-spread decisions, deterministic risk checks, and order lifecycle evidence.">
+  <title>OneSpread · Decision desk</title>
+  <link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="/" aria-label="OneSpread home"><span class="mark" aria-hidden="true">↗</span> OneSpread<span class="edition">OPTIONS LAB</span></a><span class="paper"><span class="dot"></span> Paper only</span></header>
+<main>
+  <div class="title-row"><div><p class="eyebrow">SPY / DEFINED-RISK VERTICALS</p><h1>Decision desk<span>.</span></h1></div><div class="source-controls"><div class="segmented" aria-label="Data source"><button id="replay-tab" aria-pressed="true">Replay</button><button id="journal-tab" aria-pressed="false" disabled>Local journal</button></div><button class="quiet" id="refresh">↻ Refresh</button></div></div>
+  <div class="notice" id="notice" role="status">Replay uses synthetic quotes, scripted decisions, and simulated fills. No actual performance.</div>
+  <section class="limits" aria-label="Fixed entry policy"><div><span>Maximum entry debit</span><strong>$300<span> / spread</span></strong></div><div><span>Spread structure</span><strong>$5<span> wide · 1 contract</span></strong></div><div><span>Expiration window</span><strong>7–14<span> days</span></strong></div><div><span>Decision model</span><strong>GLM-5<span> via Featherless</span></strong></div></section>
+  <div class="workspace">
+    <section class="main-column">
+      <section class="panel decision-panel" aria-labelledby="decision-title">
+        <div class="panel-heading"><h2 id="decision-title">Latest decision</h2><span id="decision-time" class="mono muted">—</span></div>
+        <div class="decision-line"><span class="status" id="action">REPLAY</span><span class="decision-kind" id="decision-kind">SPY bull call spread</span></div>
+        <p class="decision-copy" id="decision-copy">Select a scenario to inspect the decision and its risk checks.</p>
+        <div class="invalidation"><span>Invalidation</span><p id="invalidation">Fresh evidence is required before any order can proceed.</p></div>
+        <div id="reason-tags" class="tags"></div>
+      </section>
+      <section class="panel" aria-labelledby="payoff-title"><div class="panel-heading"><h2 id="payoff-title">Spread anatomy</h2><span class="pill" id="expiry">Sep 11, 2026</span></div>
+        <div class="legs" id="legs"></div>
+        <div class="chart-heading"><span>Expiration payoff</span><span class="mono muted">1 spread · before costs</span></div>
+        <div id="chart" class="chart"></div>
+        <div class="payoff-metrics" id="payoff-metrics"></div>
+        <p class="fine" id="payoff-note">Theoretical expiration payoff. Indicative quotes are not executable OPRA prices. Assignment and execution risks remain.</p>
+      </section>
+      <section class="panel" aria-labelledby="evidence-title"><div class="panel-heading"><h2 id="evidence-title">Decision evidence</h2><span class="muted" id="model-source">Scripted replay</span></div><div id="evidence"></div></section>
+    </section>
+    <aside class="side-column">
+      <section class="panel replay-controls" id="replay-controls"><div class="panel-heading"><h2>Explore the workflow</h2><span class="pill">REPLAY</span></div><label for="scenario">Scenario</label><select id="scenario"><option value="entry">01 · Eligible entry</option><option value="veto">02 · Stale quote veto</option><option value="exit">03 · Entry to exit</option></select><div class="step-row"><button id="previous" class="quiet" aria-label="Previous replay event">←</button><span id="step-label" class="mono">Event 1 / 1</span><button id="next" class="primary">Next event →</button></div><p class="fine">Runs recorded results from the same risk engine used by the paper agent.</p></section>
+      <section class="panel" aria-labelledby="risk-title"><div class="panel-heading"><h2 id="risk-title">Risk gate</h2><span id="gate-status" class="muted">—</span></div><div id="risk-checks"></div></section>
+      <section class="panel" aria-labelledby="lifecycle-title"><div class="panel-heading"><h2 id="lifecycle-title">Order lifecycle</h2></div><ol id="lifecycle" class="lifecycle"></ol><p class="fine" id="lifecycle-note">A proposal is not a fill. Broker confirmation is required at each transition.</p></section>
+      <section class="calendar"><p class="eyebrow">VERIFIED RELEASE · SEP 4</p><h2>US employment report</h2><p>Sep 4 · 8:30 a.m. ET</p><a href="https://www.bls.gov/schedule/2026/09_sched_list.htm" target="_blank" rel="noreferrer">BLS release calendar ↗</a><p class="fine">Primary release calendars reviewed for Sep 4, 8–11 a.m. ET. Recheck before the paper rehearsal.</p></section>
+    </aside>
+  </div>
+  <section class="panel activity-panel" aria-labelledby="activity-title"><div class="panel-heading"><h2 id="activity-title">Decision journal</h2><span class="muted" id="journal-caption">Replay events</span></div><div class="table-scroll"><table><thead><tr><th>Time (ET)</th><th>Action</th><th>Outcome</th><th>Source</th></tr></thead><tbody id="activity"></tbody></table></div></section>
+  <footer><span>OneSpread <span class="muted">/ Alpaca AI Trading Agents Hackathon</span></span><span>Evidence → decision → risk gate → broker</span></footer>
+</main>
+</body></html>

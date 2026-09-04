@@ -1,6 +1,6 @@
 # OneSpread — hackathon prototype
 
-SPY debit spreads with timestamped AI explanations, deterministic risk checks, and a durable paper-order journal. The backend supports dry runs, opt-in paper entry, reconciliation, cancellation, and exits. A dashboard and submission assets are still to be built. No broker order has been submitted during development.
+SPY debit spreads with timestamped AI explanations, deterministic risk checks, and a durable paper-order journal. The backend supports dry runs, opt-in paper entry, reconciliation, cancellation, and exits. A read-only dashboard displays the local journal and three synthetic replay scenarios. No broker order has been submitted during development.
 
 ## Development
 
@@ -13,7 +13,19 @@ make format                 # Ruff fixes and formatting
 uv run python -m onespread  # One read-only decision cycle
 ```
 
-Dependencies: `alpaca-py` (official SDK order validation), `httpx` (bounded inference and paper-order transport), `pydantic` (data/decision validation), and `python-dotenv`. Development tools: Ruff, ty, pytest. Git tracks source, configuration, lockfile, and sanitized reports; credentials, downloaded binaries, journals, and generated market-data CSVs are ignored. History is local; no remote has been configured or pushed.
+Dependencies: `alpaca-py` (official SDK order validation), `httpx` (bounded inference and paper-order transport), `pydantic` (data/decision validation), and `python-dotenv`. Development tools: Ruff, ty, pytest. Git tracks source, configuration, lockfile, and sanitized reports; credentials, downloaded binaries, journals, and generated market-data CSVs are ignored. A private Sites source repository supports the hosted demo; a public GitHub submission repository is still needed.
+
+## Dashboard and replay
+
+```sh
+make dashboard            # http://127.0.0.1:8765
+make build                # Synthetic-only static demo in dist/
+uv run python -m onespread.smoke  # One paid GLM inference using synthetic inputs
+```
+
+The local dashboard has Replay and Local journal views. It never imports the broker clients and exposes no trading controls. The local endpoint binds only to loopback, serves an explicit file allowlist, and reads SQLite without write access. Refreshing the view does not run the trading agent.
+
+The hosted demo bundles only four static files and synthetic replay data. It cannot reach the local journal or Alpaca. Replay scenarios exercise the real risk engine with a scripted model and fake broker: eligible entry, a stale-quote veto, and entry through confirmed flatness. The payoff chart is a theoretical expiration payoff, not realized performance. Optional page tools can select a replay scenario and read its visible decision; they cannot trade.
 
 ## Credentials and tools
 
@@ -81,8 +93,10 @@ The process must stay running to manage orders and exits. A single cycle is not 
 
 ## Calendar and journal
 
-Place an operator-reviewed calendar in `.local/onespread/calendar.json`. Its fields are `reviewed_at`, `coverage_start`, `coverage_end` (timezone-aware timestamps), `sources` (nonempty list of source URLs), and `events` (objects with `timestamp`, `title`, and `source`). Reviews expire after 24 hours. Include scheduled market-moving releases throughout the coverage interval. Empty event lists are appropriate only after checking the sources. Missing coverage blocks entries; no calendar has been fabricated or enabled.
+Place a reviewed calendar in `.local/onespread/calendar.json`. Its fields are `reviewed_at`, `coverage_start`, `coverage_end` (timezone-aware timestamps), `sources` (nonempty list of source URLs), and `events` (objects with `timestamp`, `title`, and `source`). Reviews expire after 24 hours. Include scheduled market-moving releases throughout the coverage interval. Empty event lists are appropriate only after checking the sources. Missing coverage blocks entries.
+
+A bounded review is prepared for September 4, 2026, 08:00–11:00 ET, including the 08:30 Employment Situation release. See [calendar review](output/CALENDAR_REVIEW.md) for sources and limitations; recheck before an open-session rehearsal. This configuration does not itself turn on paper execution.
 
 The private SQLite journal at `.local/onespread/journal.sqlite3` records decisions, supplied public evidence, intents, and lifecycle state. `.local/onespread/latest.json` is the latest result. Do not delete the journal while a paper order or position may exist: it is the ownership/reconciliation record. A process lock prevents two local runners acting simultaneously.
 
-Next milestone: review the event calendar, exercise the new prompt against open-session data, and add a dashboard showing evidence, decisions, risk vetoes, and broker-confirmed order status. Complete the paper execution rehearsal and submission materials afterward.
+Next milestone: exercise the new prompt against open-session data, verify a complete paper execution lifecycle, and complete the public repository, short demo video, slides, and submission. The hosted Sites demo starts private; judge access must be arranged before submission.

@@ -1,4 +1,4 @@
-.PHONY: check format run
+.PHONY: check format run dashboard build
 
 check:
 	uv run ruff check .
@@ -12,3 +12,9 @@ format:
 
 run:
 	uv run python -m onespread
+
+dashboard:
+	uv run python -m onespread.dashboard
+
+build:
+	uv run python scripts/build_dashboard.py

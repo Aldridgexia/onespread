@@ -1,0 +1,19 @@
+{
+  "reviewed_at": "2026-09-04T00:42:40.346342Z",
+  "coverage_start": "2026-09-04T08:00:00-04:00",
+  "coverage_end": "2026-09-04T11:00:00-04:00",
+  "sources": [
+    "https://www.bls.gov/schedule/2026/09_sched_list.htm",
+    "https://www.census.gov/economic-indicators/calendar-listview.html",
+    "https://www.bea.gov/news/schedule",
+    "https://www.federalreserve.gov/newsevents/2026-september.htm",
+    "https://www.ismworld.org/supply-management-news-and-reports/reports/rob-report-calendar/"
+  ],
+  "events": [
+    {
+      "timestamp": "2026-09-04T08:30:00-04:00",
+      "title": "US Employment Situation, August 2026",
+      "source": "https://www.bls.gov/schedule/2026/09_sched_list.htm"
+    }
+  ]
+}

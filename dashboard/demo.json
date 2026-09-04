@@ -1,0 +1,370 @@
+{
+  "source": "replay",
+  "model_source": "Scripted decision; real risk engine",
+  "generated_at": "2026-09-04T00:39:42.850883+00:00",
+  "scenarios": [
+    {
+      "id": "entry",
+      "title": "Eligible entry",
+      "events": [
+        {
+          "timestamp": "2026-09-04T14:00:00+00:00",
+          "action": "DRY_RUN_PROPOSAL",
+          "reasons": [
+            "paper_execution_not_enabled"
+          ],
+          "mode": "replay",
+          "feed": "indicative",
+          "order_draft": {
+            "order_class": "mleg",
+            "qty": "1",
+            "type": "limit",
+            "time_in_force": "day",
+            "limit_price": "2.00",
+            "legs": [
+              {
+                "symbol": "SPY260911C00765000",
+                "ratio_qty": "1",
+                "side": "buy",
+                "position_intent": "buy_to_open"
+              },
+              {
+                "symbol": "SPY260911C00770000",
+                "ratio_qty": "1",
+                "side": "sell",
+                "position_intent": "sell_to_open"
+              }
+            ]
+          },
+          "decision": {
+            "action": "propose",
+            "candidate_id": "c68dfc216d475464",
+            "evidence_ids": [
+              "regime"
+            ],
+            "reason": "The supplied 5-bar and 20-bar momentum agree. Propose the eligible bull call spread, subject to fresh quotes and account checks.",
+            "invalidation": "Wait if direction changes, quotes age past 60 seconds, or entry debit deteriorates by more than $0.10."
+          },
+          "evidence": {
+            "asof": "2026-09-04T14:00:00+00:00",
+            "regime": "bullish",
+            "synthetic": true,
+            "evidence": [
+              {
+                "id": "regime",
+                "timestamp": "2026-09-04T14:00:00+00:00",
+                "source": "Synthetic momentum fixture",
+                "return_5_bars": 0.0008,
+                "return_20_bars": 0.0017,
+                "note": "Illustrative inputs; not historical observations or an alpha claim."
+              }
+            ],
+            "news_scope": "No actual headlines in this deterministic replay.",
+            "candidates": [
+              {
+                "id": "c68dfc216d475464",
+                "kind": "bull_call",
+                "debit": "2.00",
+                "premium_usd": "200.00",
+                "expiry": "2026-09-11"
+              }
+            ],
+            "calendar_status": [
+              "reviewed_and_clear"
+            ]
+          },
+          "synthetic": true
+        }
+      ],
+      "spread": {
+        "long": {
+          "symbol": "SPY260911C00765000",
+          "root": "SPY",
+          "underlying": "SPY",
+          "kind": "call",
+          "expiry": "2026-09-11",
+          "strike": "765",
+          "multiplier": 100,
+          "tradable": true,
+          "quote": {
+            "bid": "3.00",
+            "ask": "3.10",
+            "timestamp": "2026-09-04T13:59:57Z"
+          },
+          "greeks": {
+            "delta": 0.52,
+            "gamma": 0.018,
+            "theta": -0.14,
+            "vega": 0.27,
+            "rho": 0.06
+          },
+          "iv": 0.19
+        },
+        "short": {
+          "symbol": "SPY260911C00770000",
+          "root": "SPY",
+          "underlying": "SPY",
+          "kind": "call",
+          "expiry": "2026-09-11",
+          "strike": "770",
+          "multiplier": 100,
+          "tradable": true,
+          "quote": {
+            "bid": "1.10",
+            "ask": "1.20",
+            "timestamp": "2026-09-04T13:59:57Z"
+          },
+          "greeks": {
+            "delta": 0.34,
+            "gamma": 0.018,
+            "theta": -0.14,
+            "vega": 0.27,
+            "rho": 0.06
+          },
+          "iv": 0.19
+        }
+      }
+    },
+    {
+      "id": "veto",
+      "title": "Stale quote veto",
+      "events": [
+        {
+          "timestamp": "2026-09-04T14:00:00+00:00",
+          "action": "WAIT",
+          "reasons": [
+            "stale_or_future_option_quote"
+          ],
+          "mode": "replay",
+          "feed": "indicative",
+          "refreshed_premium_usd": "200.00",
+          "decision": {
+            "action": "propose",
+            "candidate_id": "c68dfc216d475464",
+            "evidence_ids": [
+              "regime"
+            ],
+            "reason": "The supplied 5-bar and 20-bar momentum agree. Propose the eligible bull call spread, subject to fresh quotes and account checks.",
+            "invalidation": "Wait if direction changes, quotes age past 60 seconds, or entry debit deteriorates by more than $0.10."
+          },
+          "evidence": {
+            "asof": "2026-09-04T14:00:00+00:00",
+            "regime": "bullish",
+            "synthetic": true,
+            "evidence": [
+              {
+                "id": "regime",
+                "timestamp": "2026-09-04T14:00:00+00:00",
+                "source": "Synthetic momentum fixture",
+                "return_5_bars": 0.0008,
+                "return_20_bars": 0.0017,
+                "note": "Illustrative inputs; not historical observations or an alpha claim."
+              }
+            ],
+            "news_scope": "No actual headlines in this deterministic replay.",
+            "candidates": [
+              {
+                "id": "c68dfc216d475464",
+                "kind": "bull_call",
+                "debit": "2.00",
+                "premium_usd": "200.00",
+                "expiry": "2026-09-11"
+              }
+            ],
+            "calendar_status": [
+              "reviewed_and_clear"
+            ]
+          },
+          "synthetic": true
+        }
+      ],
+      "spread": {
+        "long": {
+          "symbol": "SPY260911C00765000",
+          "root": "SPY",
+          "underlying": "SPY",
+          "kind": "call",
+          "expiry": "2026-09-11",
+          "strike": "765",
+          "multiplier": 100,
+          "tradable": true,
+          "quote": {
+            "bid": "3.00",
+            "ask": "3.10",
+            "timestamp": "2026-09-04T13:59:57Z"
+          },
+          "greeks": {
+            "delta": 0.52,
+            "gamma": 0.018,
+            "theta": -0.14,
+            "vega": 0.27,
+            "rho": 0.06
+          },
+          "iv": 0.19
+        },
+        "short": {
+          "symbol": "SPY260911C00770000",
+          "root": "SPY",
+          "underlying": "SPY",
+          "kind": "call",
+          "expiry": "2026-09-11",
+          "strike": "770",
+          "multiplier": 100,
+          "tradable": true,
+          "quote": {
+            "bid": "1.10",
+            "ask": "1.20",
+            "timestamp": "2026-09-04T13:59:57Z"
+          },
+          "greeks": {
+            "delta": 0.34,
+            "gamma": 0.018,
+            "theta": -0.14,
+            "vega": 0.27,
+            "rho": 0.06
+          },
+          "iv": 0.19
+        }
+      }
+    },
+    {
+      "id": "exit",
+      "title": "Entry to exit",
+      "events": [
+        {
+          "timestamp": "2026-09-04T14:00:00+00:00",
+          "action": "ENTRY_INTENT",
+          "decision": {
+            "action": "propose",
+            "candidate_id": "c68dfc216d475464",
+            "evidence_ids": [
+              "regime"
+            ],
+            "reason": "The supplied 5-bar and 20-bar momentum agree. Propose the eligible bull call spread, subject to fresh quotes and account checks.",
+            "invalidation": "Wait if direction changes, quotes age past 60 seconds, or entry debit deteriorates by more than $0.10."
+          },
+          "evidence": {
+            "asof": "2026-09-04T14:00:00+00:00",
+            "regime": "bullish",
+            "synthetic": true,
+            "evidence": [
+              {
+                "id": "regime",
+                "timestamp": "2026-09-04T14:00:00+00:00",
+                "source": "Synthetic momentum fixture",
+                "return_5_bars": 0.0008,
+                "return_20_bars": 0.0017,
+                "note": "Illustrative inputs; not historical observations or an alpha claim."
+              }
+            ],
+            "news_scope": "No actual headlines in this deterministic replay.",
+            "candidates": [
+              {
+                "id": "c68dfc216d475464",
+                "kind": "bull_call",
+                "debit": "2.00",
+                "premium_usd": "200.00",
+                "expiry": "2026-09-11"
+              }
+            ],
+            "calendar_status": [
+              "reviewed_and_clear"
+            ]
+          },
+          "mode": "replay",
+          "synthetic": true
+        },
+        {
+          "timestamp": "2026-09-04T14:00:00+00:00",
+          "action": "ENTRY_SUBMITTED",
+          "reasons": [
+            "await_broker_fill"
+          ],
+          "mode": "replay",
+          "feed": "indicative",
+          "synthetic": true
+        },
+        {
+          "timestamp": "2026-09-04T14:00:00+00:00",
+          "action": "HOLD",
+          "reasons": [
+            "exit_threshold_not_reached"
+          ],
+          "mode": "replay",
+          "feed": "indicative",
+          "indicative_exit_credit": "1.80",
+          "synthetic": true
+        },
+        {
+          "timestamp": "2026-09-04T16:00:00+00:00",
+          "action": "EXIT_SUBMITTED",
+          "reasons": [
+            "await_broker_fill"
+          ],
+          "mode": "replay",
+          "feed": "indicative",
+          "synthetic": true
+        },
+        {
+          "timestamp": "2026-09-04T16:00:00+00:00",
+          "action": "CLOSED",
+          "reasons": [
+            "exit_filled_and_account_flat"
+          ],
+          "mode": "replay",
+          "feed": "indicative",
+          "synthetic": true
+        }
+      ],
+      "spread": {
+        "long": {
+          "symbol": "SPY260911C00765000",
+          "root": "SPY",
+          "underlying": "SPY",
+          "kind": "call",
+          "expiry": "2026-09-11",
+          "strike": "765",
+          "multiplier": 100,
+          "tradable": true,
+          "quote": {
+            "bid": "3.00",
+            "ask": "3.10",
+            "timestamp": "2026-09-04T13:59:57Z"
+          },
+          "greeks": {
+            "delta": 0.52,
+            "gamma": 0.018,
+            "theta": -0.14,
+            "vega": 0.27,
+            "rho": 0.06
+          },
+          "iv": 0.19
+        },
+        "short": {
+          "symbol": "SPY260911C00770000",
+          "root": "SPY",
+          "underlying": "SPY",
+          "kind": "call",
+          "expiry": "2026-09-11",
+          "strike": "770",
+          "multiplier": 100,
+          "tradable": true,
+          "quote": {
+            "bid": "1.10",
+            "ask": "1.20",
+            "timestamp": "2026-09-04T13:59:57Z"
+          },
+          "greeks": {
+            "delta": 0.34,
+            "gamma": 0.018,
+            "theta": -0.14,
+            "vega": 0.27,
+            "rho": 0.06
+          },
+          "iv": 0.19
+        }
+      }
+    }
+  ],
+  "notice": "Synthetic quotes, scripted model decisions, and simulated fills. No broker orders or actual performance."
+}

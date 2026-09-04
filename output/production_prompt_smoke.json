@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-09-04T00:44:18.597372+00:00",
+  "model": "zai-org/GLM-5",
+  "input": "Synthetic fixture, not market observations",
+  "broker_orders": 0,
+  "decision": {
+    "action": "propose",
+    "candidate_id": "c68dfc216d475464",
+    "evidence_ids": [
+      "regime"
+    ],
+    "reason": "Bullish regime supplied with matching bull_call candidate. Calendar clear per synthetic_fixture_status. Regime evidence shows positive 5-bar (0.08%) and 20-bar (0.17%) returns. Momentum is unvalidated per guidance; no statistical edge claimed. No conflicting evidence or event risk present.",
+    "invalidation": "Exit if SPY closes below the prior swing low establishing the bullish structure, or if regime shifts to neutral/bearish, or if the spread loses 50% of debit paid."
+  },
+  "valid": true,
+  "seconds": 51.57
+}
