@@ -26,7 +26,7 @@ The active-assets query with `attributes=options_enabled` returned **6,301 asset
 
 Exchange counts: NASDAQ 2,614; NYSE 1,777; ARCA 1,239; BATS 455; AMEX 90; OTC 126.
 
-The full returned underlying list is in [option_underlyings.csv](option_underlyings.csv). This was an equity/ETF asset discovery, not an exhaustive test of index-option support.
+The full returned underlying list is generated locally as `output/option_underlyings.csv` and excluded from Git. This was an equity/ETF asset discovery, not an exhaustive test of index-option support.
 
 ## Five-underlying contract inventory
 
@@ -43,7 +43,7 @@ Explicit inclusive expiration window: **September 3 through October 18, 2026**. 
 
 All 15,828 returned contracts were marked tradable, American style, size 100. The last expiry returned in this window was October 16. Dates and counts are a snapshot of the catalogue, not a guarantee of future listings.
 
-The full contract inventory is in [option_contracts_45d.csv](option_contracts_45d.csv).
+The full contract inventory is generated locally as `output/option_contracts_45d.csv` and excluded from Git.
 
 ## Actual market-data coverage
 

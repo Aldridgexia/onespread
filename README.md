@@ -1,8 +1,34 @@
-# OneSpread — hackathon prototype
+# OneSpread
+
+**AI-assisted options decisions with an independent execution gate.**
+
+[Submission package](submission/README.md) · [Pitch slides](submission/OneSpread.pdf) · [MIT license](LICENSE)
 
 SPY debit spreads with timestamped AI explanations, deterministic risk checks, and a durable paper-order journal. The backend supports dry runs, opt-in paper entry, reconciliation, cancellation, and exits. A read-only dashboard displays the local journal and three synthetic replay scenarios. No broker order has been submitted during development.
 
 ## Development
+
+### Try the dashboard without credentials
+
+On macOS or Linux (Windows via WSL), install [uv](https://docs.astral.sh/uv/getting-started/installation/), then:
+
+```sh
+git clone https://github.com/Aldridgexia/onespread.git
+cd onespread
+uv sync --locked
+make dashboard
+```
+
+Open `http://127.0.0.1:8765` and choose a Replay scenario. The three scenarios use synthetic data, a scripted model, and a fake broker while exercising the real execution engine. No API keys are required. This is the quickest reproducible judge walkthrough.
+
+### Connect your own paper account
+
+```sh
+cp .env.example .env
+uv run python scripts/install_alpaca_cli.py
+```
+
+Fill the blank keys in `.env` locally. Use a dedicated Alpaca paper account with options approval and a Featherless key with access to the configured model. Check access with the commands below. Actual decision cycles also require a reviewed event calendar; missing coverage deliberately blocks entries.
 
 Python 3.12 is pinned in `.python-version`; uv manages `.venv` and the committed `uv.lock`.
 
@@ -13,7 +39,7 @@ make format                 # Ruff fixes and formatting
 uv run python -m onespread  # One read-only decision cycle
 ```
 
-Dependencies: `alpaca-py` (official SDK order validation), `httpx` (bounded inference and paper-order transport), `pydantic` (data/decision validation), and `python-dotenv`. Development tools: Ruff, ty, pytest. Git tracks source, configuration, lockfile, and sanitized reports; credentials, downloaded binaries, journals, and generated market-data CSVs are ignored. A private Sites source repository supports the hosted demo; a public GitHub submission repository is still needed.
+Dependencies: `alpaca-py` (official SDK order validation), `httpx` (bounded inference and paper-order transport), `pydantic` (data/decision validation), and `python-dotenv`. Development tools: Ruff, ty, pytest. Git tracks source, configuration, lockfile, and sanitized reports; credentials, downloaded binaries, journals, and generated market-data CSVs are ignored. Project code is MIT-licensed; third-party dependencies retain their own licenses.
 
 ## Dashboard and replay
 
@@ -33,7 +59,7 @@ Enter keys only in the local `.env`; `.env.example` contains the public configur
 
 The official Alpaca CLI v0.0.14 was downloaded from [alpacahq/cli](https://github.com/alpacahq/cli/releases/tag/v0.0.14), checked against the release SHA-256 manifest, and installed at `.local/bin/alpaca`. It is a local tool dependency, not code generated for this project.
 
-Every decision cycle uses the official CLI for broker/account and market-data reads. The SDK validates multi-leg order structure. Mutations use a fixed paper API destination with no automatic retries, allowing the journal to handle uncertain outcomes explicitly. Run commands from this workspace; a fresh checkout also needs the verified official CLI installed at `.local/bin/alpaca` from the release above for its operating system and architecture.
+Every decision cycle uses the official CLI for broker/account and market-data reads. The SDK validates multi-leg order structure. Mutations use a fixed paper API destination with no automatic retries, allowing the journal to handle uncertain outcomes explicitly. The installer above pins the release checksum for macOS/Linux amd64/arm64 and installs only its executable under `.local/bin/alpaca`.
 
 ## Read-only Alpaca discovery
 
@@ -47,7 +73,7 @@ uv run python scripts/alpaca_access.py history
 
 The wrapper forces paper mode and permits only a fixed list of GET endpoints. Scan requires the asset inventory first. Historical probes use the scan's selected SPY contract and dates.
 
-Results: [access report](output/ALPACA_ACCESS.md), [underlying universe](output/option_underlyings.csv), and [45-day contract inventory](output/option_contracts_45d.csv). Raw data are saved privately under `.local/discovery/`.
+Results: [access report](output/ALPACA_ACCESS.md). The underlying universe and 45-day contract inventory are generated locally as `output/option_underlyings.csv` and `output/option_contracts_45d.csv` and excluded from Git. Raw data are saved privately under `.local/discovery/`.
 
 ## Featherless access and evaluation
 
@@ -99,4 +125,4 @@ A bounded review is prepared for September 4, 2026, 08:00–11:00 ET, including 
 
 The private SQLite journal at `.local/onespread/journal.sqlite3` records decisions, supplied public evidence, intents, and lifecycle state. `.local/onespread/latest.json` is the latest result. Do not delete the journal while a paper order or position may exist: it is the ownership/reconciliation record. A process lock prevents two local runners acting simultaneously.
 
-Next milestone: exercise the new prompt against open-session data, verify a complete paper execution lifecycle, and complete the public repository, short demo video, slides, and submission. The hosted Sites demo starts private; judge access must be arranged before submission.
+Next verification milestone: exercise the new prompt against open-session data and verify a complete paper execution lifecycle. See the [submission package](submission/README.md) for the pitch, slides, recording script, technical brief, and remaining submission actions. The hosted Sites demo starts private; judge access must be arranged before submission.
